@@ -1,0 +1,15 @@
+var parameters = new Dictionary<string, object>()
+{
+    {"assetId", "0x00"},
+    {"name", "C# Test Room"},
+    {"createdBy", "Kieran Evans"}
+};
+
+var txn = await Simba.CallMethod("createRoom", parameters);
+
+Console.WriteLine($"Transaction ID {txn.ID}");
+
+//Wait for the transaction to deploy to the blockchain
+var deployedTxn = await Simba.WaitForSuccessOrError(txn.ID);
+
+Console.WriteLine($"Transaction Hash {deployedTxn .TransactionHash}");
